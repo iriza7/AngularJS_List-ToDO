@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS - Tasks To Do</title>
+    <style>
+
+    </style>
+</head>
+
+<body ng-app="myApp">
+    <!--------->
+    <h3>AngularJS - Tasks To Do</h3>
+    <h3>User: Iryna</h3>
+    <h3>Plan My Day</h3>
+    <div ng-controller="myCtrl as my">
+        <input type="text" ng-model="my.taskNameField">
+        <input type="button" value="AddNew" ng-click="my.addTask(my.taskNameField)">
+        Filter: <input type="text" ng-model="my.filter1">
+        <table>
+            <tr>
+                <th>Deleting</th>
+                <th ng-click="my.sort='taskName'">Task</th>
+                <th>Check</th>
+                <th ng-click="my.sort='status'">Done/InProgress</th>
+                <th>Edit</th>
+            </tr>
+            <tr ng-repeat="task in my.tasks | orderBy: my.sort | filter: my.filter1">
+                <td>
+                    <input type="button" value="Delete" ng-click="my.deteleTask(task)"> </td>
+                <td>{{task.taskName}}</td>
+                <td>
+                    <input type="checkbox" ng-click="my.changeStatus(task)"> </td>
+                <td>{{task.status}}</td>
+                <td>
+                    <input type="button" value="Edit" ng-click="my.toEditTask(task)">
+                    <!--ng-click="my.showTable=false">-->
+                </td>
+            </tr>
+        </table>
+        <table ng-if="my.showTable">
+            <input type="text" ng-model="my.editTaskNameField">
+            <input type="button" value="Edit" ng-click="my.editTask()"> </table>
+        <!---->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/controllers/my.controller.js"></script>
+</body>
+
+</html>
